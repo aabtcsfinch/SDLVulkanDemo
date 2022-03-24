@@ -58,6 +58,15 @@ int main()
         asio::ip::tcp::endpoint endpoint(asio::ip::make_address("93.184.216.34", ec), 80);
         asio::ip::tcp::socket socket( io_context );
         socket.connect(endpoint, ec);
+
+        if(!ec)
+        {
+            std::cout << "We're connected!" << std::endl;
+        }
+        else
+        {
+            std::cout << "Failed to connect to address: \n" << ec.message() << std::endl;
+        }
     }
 
     SDL_GL_DeleteContext( glcontext );
