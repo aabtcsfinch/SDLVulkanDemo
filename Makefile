@@ -8,6 +8,8 @@ build:
 	-I "./libs/SDL2/include" \
 	-I "./libs/asio/include" \
 	-I "./libs/SOIL2/" \
+	-I "./libs/glew/include/GL" \
+	-I "./libs/SOIL2/" \
 	-llua \
 	-lSDL2 \
 	-lSDL2_image \
@@ -16,7 +18,8 @@ build:
 	-lGL \
 	-lglut \
 	-lGLU \
-	-lGLEW;
+	-lGLEW \
+	-lSOIL2;
 
 clean:
 	rm ./game;

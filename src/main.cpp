@@ -2,7 +2,7 @@
 #include "../libs/SDL2/include/SDL.h"
 
 #define GLEW_STATIC
-#include <GL/glew.h>
+#include "../libs/glew/include/GL/glew.h"
 #include "../libs/SDL2/include/SDL_opengl.h"
 #include "../libs/glm/glm/glm.hpp"
 #include "../libs/glm/glm/gtc/matrix_transform.hpp"
@@ -10,7 +10,7 @@
 #include "../libs/asio/include/asio.hpp"
 #include "../libs/asio/include/asio/ts/buffer.hpp"
 #include "../libs/asio/include/asio/ts/internet.hpp"
-#include <SOIL/SOIL.h>
+#include "../libs/SOIL2/SOIL2.h"
 
 const GLint WIDTH = 1920, HEIGHT = 1080;
 bool isRunning = false;
@@ -83,6 +83,7 @@ int main()
         {
             std::cout << "Failed to connect to address: \n" << ec.message() << std::endl;
         }
+
     }
 
     SDL_GL_DeleteContext( glcontext );
