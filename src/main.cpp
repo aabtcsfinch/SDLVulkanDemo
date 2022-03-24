@@ -10,8 +10,10 @@
 #include "../libs/asio/include/asio.hpp"
 #include "../libs/asio/include/asio/ts/buffer.hpp"
 #include "../libs/asio/include/asio/ts/internet.hpp"
+#include <SOIL/SOIL.h>
 
 const GLint WIDTH = 1920, HEIGHT = 1080;
+bool isRunning = false;
 
 
 int main()
@@ -39,13 +41,27 @@ int main()
 
     glViewport(0, 0, WIDTH, HEIGHT);
 
-    SDL_Event windowEvent;
-
-    while( true )
+    SDL_Event event;
+    isRunning = true;
+    while( isRunning )
     {
-        if( SDL_PollEvent( &windowEvent ) )
+        if( SDL_PollEvent( &event ) )
         {
-            if ( windowEvent.type == SDL_QUIT) break;
+            if ( event.type == SDL_QUIT) break;
+            switch(event.type)
+            {
+                case SDL_KEYDOWN:
+                {
+                     if (event.key.keysym.sym == SDLK_ESCAPE || event.key.keysym.sym == SDLK_SPACE) 
+                     {
+                        isRunning = false;
+                    }
+                }
+                default:
+                {
+                    break;
+                }
+            }
         }
 
         glClearColor( 0.2f, 0.3f, 0.3f, 1.0f );

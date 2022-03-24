@@ -7,6 +7,7 @@ build:
 	-o game \
 	-I "./libs/SDL2/include" \
 	-I "./libs/asio/include" \
+	-I "./libs/SOIL2/" \
 	-llua \
 	-lSDL2 \
 	-lSDL2_image \
