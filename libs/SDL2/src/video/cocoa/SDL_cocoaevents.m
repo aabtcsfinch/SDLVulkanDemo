@@ -71,7 +71,7 @@ static SDL_Window *FindSDLWindowForNSWindow(NSWindow *win)
     SDL_SendQuit();
 }
 
-static SDL_bool s_bShouldHandleEventsInSDLApplication = SDL_FALSE;
+static SDL_bool s_bShouldProcessInputInSDLApplication = SDL_FALSE;
 
 static void Cocoa_DispatchEvent(NSEvent *theEvent)
 {
@@ -106,7 +106,7 @@ static void Cocoa_DispatchEvent(NSEvent *theEvent)
 // processes (such as CEF) that are passed down to NSApp.
 - (void)sendEvent:(NSEvent *)theEvent
 {
-    if (s_bShouldHandleEventsInSDLApplication) {
+    if (s_bShouldProcessInputInSDLApplication) {
         Cocoa_DispatchEvent(theEvent);
     }
 
@@ -466,7 +466,7 @@ Cocoa_RegisterApp(void)
         [SDLApplication sharedApplication];
         SDL_assert(NSApp != nil);
 
-        s_bShouldHandleEventsInSDLApplication = SDL_TRUE;
+        s_bShouldProcessInputInSDLApplication = SDL_TRUE;
 
         if (!SDL_GetHintBoolean(SDL_HINT_MAC_BACKGROUND_APP, SDL_FALSE)) {
             [NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
@@ -537,7 +537,7 @@ Cocoa_PumpEventsUntilDate(_THIS, NSDate *expiration, bool accumulate)
             return 0;
         }
 
-        if (!s_bShouldHandleEventsInSDLApplication) {
+        if (!s_bShouldProcessInputInSDLApplication) {
             Cocoa_DispatchEvent(event);
         }
 

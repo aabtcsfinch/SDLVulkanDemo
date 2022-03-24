@@ -36,7 +36,7 @@
 static void (*NAS_AuCloseServer) (AuServer *);
 static void (*NAS_AuNextEvent) (AuServer *, AuBool, AuEvent *);
 static AuBool(*NAS_AuDispatchEvent) (AuServer *, AuEvent *);
-static void (*NAS_AuHandleEvents) (AuServer *);
+static void (*NAS_AuProcessInput) (AuServer *);
 static AuFlowID(*NAS_AuCreateFlow) (AuServer *, AuStatus *);
 static void (*NAS_AuStartFlow) (AuServer *, AuFlowID, AuStatus *);
 static void (*NAS_AuSetElements)
@@ -79,7 +79,7 @@ load_nas_syms(void)
     SDL_NAS_SYM(AuCloseServer);
     SDL_NAS_SYM(AuNextEvent);
     SDL_NAS_SYM(AuDispatchEvent);
-    SDL_NAS_SYM(AuHandleEvents);
+    SDL_NAS_SYM(AuProcessInput);
     SDL_NAS_SYM(AuCreateFlow);
     SDL_NAS_SYM(AuStartFlow);
     SDL_NAS_SYM(AuSetElements);
@@ -196,7 +196,7 @@ NAS_CaptureFromDevice(_THIS, void *buffer, int buflen)
 
     while (SDL_TRUE) {
         /* just keep the event queue moving and the server chattering. */
-        NAS_AuHandleEvents(h->aud);
+        NAS_AuProcessInput(h->aud);
     
         retval = (int) NAS_AuReadElement(h->aud, h->flow, 1, buflen, buffer, NULL);
         /*printf("read %d capture bytes\n", (int) retval);*/
@@ -220,7 +220,7 @@ NAS_FlushCapture(_THIS)
 
     do {
         /* just keep the event queue moving and the server chattering. */
-        NAS_AuHandleEvents(h->aud);
+        NAS_AuProcessInput(h->aud);
         br = NAS_AuReadElement(h->aud, h->flow, 1, sizeof (buf), buf, NULL);
         /*printf("flushed %d capture bytes\n", (int) br);*/
         total += br;

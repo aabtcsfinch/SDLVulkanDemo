@@ -2,7 +2,7 @@
 #ifndef GAMESTATE_H
 #define GAMESTATE_H
 
-#include "GameEngine.h"
+#include "Game.h"
 
 class GameState
 {
@@ -13,10 +13,10 @@ class GameState
         virtual void Pause() = 0;
         virtual void Resume() = 0;
 
-        virtual void HandleEvents(GameEngine* g) = 0;
-        virtual void Update(GameEngine* g) = 0;
-        virtual void Draw(GameEngine* g) = 0;
-        void ChangeState(GameEngine* g, GameState* state){ g->ChangeState(state); }
+        virtual void ProccessInput(Game* g) = 0;
+        virtual void Update(Game* g) = 0;
+        virtual void Draw(Game* g) = 0;
+        void ChangeState(Game* g, GameState* state){ g->ChangeState(state); }
     
     protected:
         GameState(){}

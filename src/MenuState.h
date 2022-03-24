@@ -12,9 +12,9 @@ class MenuState : public GameState
         void Pause();
         void Resume();
 
-        void HandleEvents(GameEngine* game);
-        void Update(GameEngine* game);
-        void Draw(GameEngine* game);
+        void ProccessInput(Game* game);
+        void Update(Game* game);
+        void Draw(Game* game);
 
         static MenuState* Instance() { return &instance; }
 

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "../libs/SDL2/include/SDL.h"
-#include "GameEngine.h"
+#include "Game.h"
 #include "GameState.h"
 #include "SplashScreen.h"
 #include "MenuState.h"
@@ -28,7 +28,7 @@ void SplashScreen::Resume()
     std::cout<< "We;re at the resume phase of the splash screen" << std::endl;
 }
 
-void SplashScreen::HandleEvents(GameEngine* game)
+void SplashScreen::ProccessInput(Game* game)
 {
     SDL_Event event;
 
@@ -53,12 +53,12 @@ void SplashScreen::HandleEvents(GameEngine* game)
 	}
 }
 
-void SplashScreen::Update(GameEngine* game)
+void SplashScreen::Update(Game* game)
 {
 
 }
 
-void SplashScreen::Draw(GameEngine* game)
+void SplashScreen::Draw(Game* game)
 {
     /* draw stuff here */
 }
