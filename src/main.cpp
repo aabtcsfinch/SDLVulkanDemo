@@ -1,9 +1,15 @@
 #include <iostream>
-#include <SDL2/SDL.h>
+#include "../libs/SDL2/include/SDL.h"
 
 #define GLEW_STATIC
 #include <GL/glew.h>
-#include <SDL2/SDL_opengl.h>
+#include "../libs/SDL2/include/SDL_opengl.h"
+#include "../libs/glm/glm/glm.hpp"
+#include "../libs/glm/glm/gtc/matrix_transform.hpp"
+#include "../libs/glm/glm/gtc/type_ptr.hpp"
+#include "../libs/asio/include/asio.hpp"
+#include "../libs/asio/include/asio/ts/buffer.hpp"
+#include "../libs/asio/include/asio/ts/internet.hpp"
 
 const GLint WIDTH = 1920, HEIGHT = 1080;
 
@@ -18,7 +24,7 @@ int main()
     SDL_GL_SetAttribute( SDL_GL_CONTEXT_MINOR_VERSION, 3);
     SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 8);
 
-    SDL_Window *window = SDL_CreateWindow( "OpenGL", 0, 0, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
+    SDL_Window *window = SDL_CreateWindow( "SDL2 Vulkan OpenGL and ASIO Game Template v1.0", 0, 0, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
 
     SDL_GLContext context = SDL_GL_CreateContext( window );
 

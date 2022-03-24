@@ -1,9 +1,12 @@
+dev:
+	make clean && make build && make run;
+	
 build:
 	g++ -w -std=c++20 \
 	./src/*.cpp \
 	-o game \
-	-I "./lib/lua" \
-	-L "./lib/lua" \
+	-I "./libs/SDL2/include" \
+	-I "./libs/asio/include" \
 	-llua \
 	-lSDL2 \
 	-lSDL2_image \
