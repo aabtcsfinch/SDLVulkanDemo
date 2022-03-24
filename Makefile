@@ -18,8 +18,7 @@ build:
 	-lGL \
 	-lglut \
 	-lGLU \
-	-lGLEW \
-	-lSOIL2;
+	-lGLEW;
 
 clean:
 	rm ./game;
