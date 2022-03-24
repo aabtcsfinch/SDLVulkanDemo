@@ -26,7 +26,7 @@ int main()
 
     SDL_Window *window = SDL_CreateWindow( "SDL2 Vulkan OpenGL and ASIO Game Template v1.0", 0, 0, WIDTH, HEIGHT, SDL_WINDOW_OPENGL);
 
-    SDL_GLContext context = SDL_GL_CreateContext( window );
+    SDL_GLContext glcontext = SDL_GL_CreateContext( window );
 
     glewExperimental = GL_TRUE;
 
@@ -53,9 +53,14 @@ int main()
 
         /* draw OpenGL */
         SDL_GL_SwapWindow( window );
+        asio::io_context io_context;
+        asio::error_code ec;
+        asio::ip::tcp::endpoint endpoint(asio::ip::make_address("93.184.216.34", ec), 80);
+        asio::ip::tcp::socket socket( io_context );
+        socket.connect(endpoint, ec);
     }
 
-    SDL_GL_DeleteContext( context );
+    SDL_GL_DeleteContext( glcontext );
     SDL_DestroyWindow( window );
     SDL_Quit();
 
