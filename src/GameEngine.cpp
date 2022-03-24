@@ -8,9 +8,9 @@ void GameEngine::Init(const char* title, int width=1920, int height=1080)
 {
     SDL_Init( SDL_INIT_VIDEO );
 
-    SDL_WindowFlags windowFlags = (SDL_WindowFlags)(SDL_WINDOW_VULKAN);
+    this->windowFlags = (SDL_WindowFlags)(SDL_WINDOW_VULKAN);
 
-    _window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _windowExtent.width, _windowExtent.height, windowFlags);
+    this->window = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, _windowExtent.width, _windowExtent.height, this->windowFlags);
 
     this->_isInitialized = true;
 }
@@ -19,7 +19,7 @@ void GameEngine::CleanUp()
 {
     if(this->_isInitialized)
     {
-        SDL_DestroyWindow(_window);
+        SDL_DestroyWindow(this->window);
     }
 }
 

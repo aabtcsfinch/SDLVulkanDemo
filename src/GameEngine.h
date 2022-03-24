@@ -14,8 +14,6 @@ class GameEngine
 
 		VkExtent2D _windowExtent{ 1920 , 1080 };
 
-		struct SDL_Window* _window{ nullptr };
-
 		//initializes everything in the engine
 		void Init(const char* title, int width=1920, int height=1080);
 		void CleanUp();
@@ -26,6 +24,7 @@ class GameEngine
 
 		/* check to see if we're still running */
 		bool IsRunning() { return isRunning; }
+		void Quit() { isRunning = false; }
 		/* handle events */
 		void HandleEvents();
 		/* update loop */
@@ -36,8 +35,13 @@ class GameEngine
 		//run main loop
 		void Run();
 
+		SDL_Renderer* renderer;
+
 	private:
 		bool isRunning;
 		std::vector<GameState*> states;
+		SDL_WindowFlags windowFlags;
+		SDL_Renderer* render;
+		SDL_Window* window;
 };
 #endif
