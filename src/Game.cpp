@@ -152,8 +152,50 @@ void Game::HandleCameraMovement() {
     camera.y = camera.y > camera.h ? camera.h : camera.y;
 }
 
-void Game::Destroy() {
+void Game::CleanUp() {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
+}
+
+void Game::ChangeState(GameState* state)
+{
+    if ( !states.empty() )
+    {
+        this->states.back()->CleanUp();
+        this->states.pop_back();
+    }
+
+    //store and init the new state
+    this->states.push_back(state);
+    this->states.back()->Initialize();
+}
+
+void Game::PushState(GameState* state)
+{
+    //pause the state
+    if ( !states.empty() )
+    {
+        this->states.back()->Pause();
+    }
+
+    //store and initialize the new state
+    this->states.push_back(state);
+    this->states.back()->Initialize();
+}
+
+void Game::PopState()
+{
+    //cleanup the current state
+    if ( !states.empty() )
+    {
+        this->states.back()->CleanUp();
+        this->states.pop_back();
+    }
+
+    //resume previous state
+    if( !states.empty() )
+    {
+        this->states.back()->Resume();
+    }
 }

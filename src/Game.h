@@ -4,11 +4,13 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <vector>
 #include "./Entity.h"
 #include "./Component.h"
 #include "./EntityManager.h"
 #include "Constants.h"
 #include "vk_types.h"
+#include "GameStates/GameState.h"
 
 class AssetManager;
 
@@ -16,6 +18,7 @@ class Game {
     private:
         bool isRunning;
         SDL_Window *window;
+		std::vector<GameState*> states;
     public:
         Game();
         ~Game();
@@ -28,11 +31,19 @@ class Game {
 		VkExtent2D _windowExtent{WINDOW_WIDTH, WINDOW_HEIGHT};
         void LoadLevel(int levelNumber);
         void Initialize(const char* title, int width, int height);
+		void CleanUp();
+
         void ProcessInput();
         void Update();
         void Render();
-        void Destroy();
-        void HandleCameraMovement();
+        
+		/* game state functionality */
+		void ChangeState(GameState* state);
+		void PushState(GameState* state);
+		void PopState();
+
+        
+		void HandleCameraMovement();
 };
 
 #endif
