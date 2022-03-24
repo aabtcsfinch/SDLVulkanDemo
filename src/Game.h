@@ -7,6 +7,8 @@
 #include "./Entity.h"
 #include "./Component.h"
 #include "./EntityManager.h"
+#include "Constants.h"
+#include "vk_types.h"
 
 class AssetManager;
 
@@ -23,8 +25,9 @@ class Game {
         static AssetManager* assetManager;
         static SDL_Event event;
         static SDL_Rect camera;
+		VkExtent2D _windowExtent{WINDOW_WIDTH, WINDOW_HEIGHT};
         void LoadLevel(int levelNumber);
-        void Initialize(int width, int height);
+        void Initialize(const char* title, int width, int height);
         void ProcessInput();
         void Update();
         void Render();

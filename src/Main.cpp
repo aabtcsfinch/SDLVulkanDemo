@@ -5,7 +5,7 @@
 int main(int argc, char *args[]) {
     Game game;
 
-    game.Initialize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    game.Initialize("SDL Vulkan Turn Based Strategy Game V1.0", WINDOW_WIDTH, WINDOW_HEIGHT);
 
     while (game.IsRunning()) {
         game.ProcessInput();

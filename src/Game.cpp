@@ -1,5 +1,6 @@
 #include <iostream>
 #include "./Constants.h"
+#include <SDL2/SDL_vulkan.h>
 #include "./Game.h"
 #include "./AssetManager.h"
 #include "./Map.h"
@@ -7,6 +8,8 @@
 #include "./Components/SpriteComponent.h"
 #include "./Components/KeyboardControlComponent.h"
 #include "../libs/glm/glm.hpp"
+#include "vk_types.h"
+#
 
 EntityManager manager;
 AssetManager* Game::assetManager = new AssetManager(&manager);
@@ -26,13 +29,13 @@ bool Game::IsRunning() const {
     return this->isRunning;
 }
 
-void Game::Initialize(int width, int height) {
+void Game::Initialize(const char* title, int width, int height) {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0) {
         std::cerr << "Error initializing SDL." << std::endl;
         return;
     }
     window = SDL_CreateWindow(
-        NULL,
+        title,
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
         width,
