@@ -40,7 +40,7 @@ void Game::Initialize(const char* title, int width, int height) {
         SDL_WINDOWPOS_CENTERED,
         width,
         height,
-        SDL_WINDOW_RESIZABLE
+        SDL_WINDOW_VULKAN
     );
     if (!window) {
         std::cerr << "Error creating SDL window." << std::endl;
